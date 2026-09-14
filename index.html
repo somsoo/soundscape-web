@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>백색소음 사운드 믹서 | 수면·집중 빗소리·파도·화이트 노이즈 무료 합성기 (SoundScape Web)</title>
+  <meta name="description" content="BetterSleep의 무료 대안! 광고로 끊김 없는 100% 브라우저 Web Audio 백색소음 합성 믹서. 빗소리, 파도, 브라운 노이즈, 캠프파이어 볼륨 믹싱 및 수면 타이머.">
+  <link rel="canonical" href="https://soundscape-web.enjoy-onepage.com/">
+  
+  <meta property="og:title" content="SoundScape Web - 광고 없는 무료 백색소음 사운드 믹서">
+  <meta property="og:description" content="다운로드 0바이트! 브라우저 코드로 직접 합성하는 맑고 깊은 빗소리, 파도, 백색소음 멀티트랙 믹서입니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://soundscape-web.enjoy-onepage.com/">
+  
+  <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google AdSense 비동기 로더 (No-Duplicate-Push 헌법 준수) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+
+  <style>
+    .sound-card-active { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.1); }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- 상단 슬림 띠배너 (Top Slim Banner: 3824727725, 50~60px 고정) -->
+  <div class="manual-ad-box ad-top-banner w-full max-w-5xl mx-auto my-2 text-center overflow-hidden min-h-[50px] max-h-[60px]">
+    <ins class="adsbygoogle"
+         style="display:block; min-height:50px; max-height:60px;"
+         data-ad-client="ca-pub-2228289204702106"
+         data-ad-slot="3824727725"
+         data-ad-format="horizontal"
+         data-full-width-responsive="false"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- 메인 래퍼 (Double-Nesting 금지, 루트 단일 컨테이너 선언) -->
+  <main class="w-full max-w-5xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden mb-8 flex-1">
+    
+    <!-- 네비게이션 헤더 & 프라이버시 배지 -->
+    <header class="border-b border-slate-800 px-6 py-6 sm:px-10 flex flex-col md:flex-row items-center justify-between gap-4 bg-gradient-to-b from-slate-900 to-slate-950">
+      <div class="flex items-center gap-3.5 text-center md:text-left">
+        <div class="w-12 h-12 rounded-2xl bg-cyan-500 text-slate-950 flex items-center justify-center text-2xl shadow-lg shadow-cyan-500/20 shrink-0 font-black">
+          <i class="fa-solid fa-sliders"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 justify-center md:justify-start">
+            <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">SoundScape Web</h1>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800">무제한 무료 믹서</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 mt-0.5">BetterSleep 구독 피로 없는 100% 브라우저 코드 합성 백색소음</p>
+        </div>
+      </div>
+
+      <!-- 상단 액션 버튼 그룹 (PRO 모달 & 배지) -->
+      <div class="flex items-center gap-2.5">
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-800 text-cyan-400 text-xs font-bold">
+          <i class="fa-solid fa-shield-halved text-cyan-400"></i>
+          <span>100% Zero-Server</span>
+        </div>
+        <button id="soundProBtn" onclick="openSoundProModal()" class="px-3.5 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 text-xs font-bold rounded-xl shadow-sm transition flex items-center gap-1.5">
+          <i class="fa-solid fa-crown text-slate-950"></i>
+          <span id="soundProBtnText">PRO 라이선스</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 안심 배지 바 -->
+    <div class="bg-cyan-950/40 border-b border-cyan-900/50 px-6 py-2.5 text-xs text-cyan-200 flex items-center justify-between flex-wrap gap-2">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-headphones text-cyan-400"></i>
+        <span><strong>끊김 없는 재생 보장:</strong> 오디오 파일 다운로드 0MB · 광고로 재생이 끊기지 않는 100% 실시간 Web Audio 합성</span>
+      </div>
+      <a href="privacy.html" class="underline hover:text-cyan-300 font-semibold text-[11px]">로컬 보증서 확인 →</a>
+    </div>
+
+    <!-- LOGIC START -->
+    <!-- PC 1:1 좌우 2단 대칭형 그리드 (lg:grid-cols-12 좌 6열 : 우 6열 sticky) -->
+    <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- 좌측 6열: 사운드 믹서 트랙 카드 그리드 -->
+      <div class="lg:col-span-6 space-y-6">
+
+        <!-- 원터치 프리셋 칩 바 -->
+        <div class="flex gap-2 overflow-x-auto pb-1 text-xs font-bold">
+          <button type="button" onclick="applyPreset('rainy')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 shrink-0 transition">
+            🌧️ 비 오는 날
+          </button>
+          <button type="button" onclick="applyPreset('ocean')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 shrink-0 transition">
+            🌊 밤바다 파도
+          </button>
+          <button type="button" onclick="applyPreset('campfire')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 shrink-0 transition">
+            🔥 고요한 불멍
+          </button>
+          <button type="button" onclick="applyPreset('deepSleep')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 shrink-0 transition">
+            😴 깊은 숙면 (브라운)
+          </button>
+        </div>
+
+        <!-- 6대 사운드 트랙 카드 목록 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+          <!-- 트랙 1: 빗소리 -->
+          <div id="card-rain" class="p-4 bg-slate-950 border border-slate-800 rounded-2xl space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">🌧️</span>
+                <span class="text-xs font-bold text-white">빗소리 (Rain)</span>
+              </div>
+              <button type="button" onclick="toggleTrack('rain')" id="btnTrack-rain" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold rounded-lg transition">켜기</button>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                <span>VOLUME</span>
+                <span id="volVal-rain">0%</span>
+              </div>
+              <input type="range" id="slider-rain" min="0" max="100" value="0" class="w-full accent-cyan-400 cursor-pointer" oninput="setTrackVolume('rain', this.value)"/>
+            </div>
+          </div>
+
+          <!-- 트랙 2: 파도 -->
+          <div id="card-waves" class="p-4 bg-slate-950 border border-slate-800 rounded-2xl space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">🌊</span>
+                <span class="text-xs font-bold text-white">파도 (Ocean)</span>
+              </div>
+              <button type="button" onclick="toggleTrack('waves')" id="btnTrack-waves" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold rounded-lg transition">켜기</button>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                <span>VOLUME</span>
+                <span id="volVal-waves">0%</span>
+              </div>
+              <input type="range" id="slider-waves" min="0" max="100" value="0" class="w-full accent-cyan-400 cursor-pointer" oninput="setTrackVolume('waves', this.value)"/>
+            </div>
+          </div>
+
+          <!-- 트랙 3: 브라운 노이즈 (깊은 저음) -->
+          <div id="card-brown" class="p-4 bg-slate-950 border border-slate-800 rounded-2xl space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">🤎</span>
+                <span class="text-xs font-bold text-white">브라운 노이즈</span>
+              </div>
+              <button type="button" onclick="toggleTrack('brown')" id="btnTrack-brown" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold rounded-lg transition">켜기</button>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                <span>VOLUME</span>
+                <span id="volVal-brown">0%</span>
+              </div>
+              <input type="range" id="slider-brown" min="0" max="100" value="0" class="w-full accent-cyan-400 cursor-pointer" oninput="setTrackVolume('brown', this.value)"/>
+            </div>
+          </div>
+
+          <!-- 트랙 4: 화이트 노이즈 -->
+          <div id="card-whiteNoise" class="p-4 bg-slate-950 border border-slate-800 rounded-2xl space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">🤍</span>
+                <span class="text-xs font-bold text-white">화이트 노이즈</span>
+              </div>
+              <button type="button" onclick="toggleTrack('whiteNoise')" id="btnTrack-whiteNoise" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold rounded-lg transition">켜기</button>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                <span>VOLUME</span>
+                <span id="volVal-whiteNoise">0%</span>
+              </div>
+              <input type="range" id="slider-whiteNoise" min="0" max="100" value="0" class="w-full accent-cyan-400 cursor-pointer" oninput="setTrackVolume('whiteNoise', this.value)"/>
+            </div>
+          </div>
+
+          <!-- 트랙 5: 바람 -->
+          <div id="card-wind" class="p-4 bg-slate-950 border border-slate-800 rounded-2xl space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">🍃</span>
+                <span class="text-xs font-bold text-white">솔바람 (Wind)</span>
+              </div>
+              <button type="button" onclick="toggleTrack('wind')" id="btnTrack-wind" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold rounded-lg transition">켜기</button>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                <span>VOLUME</span>
+                <span id="volVal-wind">0%</span>
+              </div>
+              <input type="range" id="slider-wind" min="0" max="100" value="0" class="w-full accent-cyan-400 cursor-pointer" oninput="setTrackVolume('wind', this.value)"/>
+            </div>
+          </div>
+
+          <!-- 트랙 6: 캠프파이어 불멍 -->
+          <div id="card-fire" class="p-4 bg-slate-950 border border-slate-800 rounded-2xl space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl">🔥</span>
+                <span class="text-xs font-bold text-white">불멍 (Campfire)</span>
+              </div>
+              <button type="button" onclick="toggleTrack('fire')" id="btnTrack-fire" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold rounded-lg transition">켜기</button>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                <span>VOLUME</span>
+                <span id="volVal-fire">0%</span>
+              </div>
+              <input type="range" id="slider-fire" min="0" max="100" value="0" class="w-full accent-cyan-400 cursor-pointer" oninput="setTrackVolume('fire', this.value)"/>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 우측 6열: 마스터 컨트롤 & 사운드스케이프 영수증 카드 (lg:sticky) -->
+      <div class="lg:col-span-6 lg:sticky lg:top-8 space-y-6">
+        
+        <!-- 실시간 명세 영수증 카드 -->
+        <div class="bg-slate-950 text-slate-100 rounded-3xl p-6 sm:p-7 shadow-2xl border border-slate-800">
+          
+          <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
+              <h2 class="font-bold text-sm text-slate-200 tracking-wide uppercase">
+                <span id="soundStatusTitle">사운드 믹서 대기 중</span>
+              </h2>
+            </div>
+            <div class="text-right font-mono text-xs text-slate-400">
+              <span id="activeTracksCount">0개 트랙 재생</span>
+            </div>
+          </div>
+
+          <!-- 마스터 재생 & 타이머 섹션 -->
+          <div class="my-5 p-5 bg-slate-900 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between">
+              <button type="button" id="btnMasterPlay" onclick="toggleMasterPlay()" class="w-full py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black rounded-2xl transition shadow-lg shadow-cyan-950/50 flex items-center justify-center gap-2 active:scale-95 text-sm">
+                <i class="fa-solid fa-play" id="masterIcon"></i>
+                <span id="masterBtnText">모든 소리 재생</span>
+              </button>
+            </div>
+
+            <!-- 수면 타이머 설정 -->
+            <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
+              <span class="text-slate-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-moon text-amber-400"></i>
+                수면 타이머
+              </span>
+              <select id="sleepTimerSelect" onchange="setSleepTimer(this.value)" class="bg-slate-950 text-slate-200 px-3 py-1.5 rounded-xl border border-slate-800 outline-none text-xs">
+                <option value="0">타이머 끄기</option>
+                <option value="15">15분 후 자동 종료</option>
+                <option value="30">30분 후 자동 종료</option>
+                <option value="60">1시간 후 자동 종료</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 동적 작업 명세 영수증 -->
+          <div class="py-2 space-y-3 font-mono text-xs border-t border-slate-800">
+            <div class="flex justify-between text-slate-400">
+              <span>AUDIO SYNTHESIS:</span>
+              <span class="text-cyan-400 font-bold">100% 브라우저 Web Audio</span>
+            </div>
+            <div class="flex justify-between text-slate-400">
+              <span>BANDWIDTH COST:</span>
+              <span class="text-emerald-400 font-bold">0 MB (다운로드 없음)</span>
+            </div>
+            <div class="flex justify-between text-slate-400">
+              <span>ACTIVE PRESET:</span>
+              <span class="text-white font-bold" id="receiptPresetName">커스텀 믹스</span>
+            </div>
+          </div>
+
+          <!-- 전사 공통 원클릭 결과 복사 & 바이럴 링크 -->
+          <div class="pt-5 border-t border-slate-800 space-y-2.5">
+            <button type="button" id="btnCopyResult" onclick="copySoundResult()" class="w-full py-3.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black rounded-2xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-cyan-950/40">
+              <i class="fa-solid fa-copy text-slate-950"></i>
+              <span>사운드 믹스 및 바로가기 클립보드 복사</span>
+            </button>
+          </div>
+
+          <!-- 보안 확인 문구 -->
+          <div class="mt-4 text-center text-[10px] text-slate-500 font-mono">
+            100% REAL-TIME NOISE FILTERING · ZERO AD AUDIO INTERRUPTIONS
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- LOGIC END -->
+
+    <!-- 본문 중간 반응형 배너 (In-Result Slot: 1186914926, 1:1 푸시 규격) -->
+    <div class="manual-ad-box ad-mid-banner w-full max-w-4xl mx-auto my-6 text-center overflow-hidden">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2228289204702106"
+           data-ad-slot="1186914926"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- E-E-A-T 서브페이지 네비게이션 링크 푸터 -->
+    <footer class="bg-slate-950 border-t border-slate-800 px-6 py-6 text-center text-xs text-slate-500">
+      <div class="max-w-3xl mx-auto flex flex-wrap items-center justify-center gap-4 mb-3 font-medium">
+        <a href="about.html" class="hover:text-cyan-400 transition">서비스 소개 & 기술 원리</a>
+        <span class="text-slate-700">·</span>
+        <a href="privacy.html" class="hover:text-cyan-400 transition">개인정보처리방침 (로컬 보증서)</a>
+        <span class="text-slate-700">·</span>
+        <a href="terms.html" class="hover:text-cyan-400 transition">이용약관</a>
+        <span class="text-slate-700">·</span>
+        <a href="sitemap.xml" class="hover:text-cyan-400 transition">사이트맵</a>
+      </div>
+      <p>© 2026 SoundScape Web. All rights reserved. Zero-Upload Client-Side Architecture.</p>
+    </footer>
+
+  </main>
+
+  <!-- 하단 대형 배너 (푸터 직전: 3416334507, 1:1 푸시 규격) -->
+  <div class="manual-ad-box ad-bottom-banner w-full max-w-5xl mx-auto mb-8 text-center overflow-hidden">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2228289204702106"
+         data-ad-slot="3416334507"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- Lemon Squeezy PRO 라이선스 등록 모달 -->
+  <div id="soundProModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-800 text-center space-y-5 text-slate-100">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl border border-amber-500/30">
+        <i class="fa-solid fa-crown"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-black text-white">PRO 평생 무광고 라이선스</h3>
+        <p class="text-xs text-slate-400 mt-1">1회 결제로 모든 광고 영구 제거 및 무제한 사운드 믹스</p>
+      </div>
+
+      <div class="bg-slate-950/60 border border-slate-800 p-4 rounded-2xl text-left text-xs space-y-1.5 text-slate-300 font-medium">
+        <p>✓ 구글 광고 영구 전면 차단 (소리 집중)</p>
+        <p>✓ 1회 결제 ($2.99 / 약 3,900원, 정기구독 아님)</p>
+        <p>✓ 최대 3대 기기(PC/태블릿/스마트폰) 영구 인증</p>
+      </div>
+
+      <div class="space-y-2">
+        <input type="text" id="soundLicenseKeyInput" placeholder="라이선스 키 입력 (예: PRO-XXXX-XXXX)" class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-center uppercase focus:ring-2 focus:ring-cyan-400 outline-none text-white"/>
+        <button type="button" id="btnVerifySoundLicense" onclick="verifySoundLicenseKey()" class="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded-xl transition">
+          라이선스 키 인증하기
+        </button>
+      </div>
+
+      <div class="pt-3 border-t border-slate-800 flex flex-col gap-2 text-xs">
+        <a href="https://lemonsqueezy.com" target="_blank" class="text-cyan-400 font-bold hover:underline">
+          👉 아직 키가 없으신가요? 평생 이용권 구매하기 ($2.99)
+        </a>
+        <button type="button" onclick="closeSoundProModal()" class="text-slate-400 hover:text-slate-200">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전사 공통 원클릭 결과 복사 토스트 알림 컴포넌트 -->
+  <div id="global-ux-toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#083344;color:#67e8f9;border:1px solid #0e7490;padding:12px 24px;border-radius:9999px;font-size:14px;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,0.4);z-index:9999;transition:all 0.3s ease;opacity:0;pointer-events:none;">
+    알림 메시지
+  </div>
+
+  <!-- 핵심 클라이언트 사이드 사운드스케이프 믹서 스크립트 -->
+  <script>
+    let isMasterPlaying = false;
+    let audioCtx = null;
+    let sleepTimerTimeout = null;
+
+    const tracks = {
+      rain: { name: '빗소리', volume: 0, gainNode: null, sourceNode: null, filter: 'lowpass', freq: 750 },
+      waves: { name: '파도', volume: 0, gainNode: null, sourceNode: null, filter: 'bandpass', freq: 350 },
+      brown: { name: '브라운 노이즈', volume: 0, gainNode: null, sourceNode: null, filter: 'lowpass', freq: 200 },
+      whiteNoise: { name: '화이트 노이즈', volume: 0, gainNode: null, sourceNode: null, filter: 'allpass', freq: 1000 },
+      wind: { name: '솔바람', volume: 0, gainNode: null, sourceNode: null, filter: 'bandpass', freq: 500 },
+      fire: { name: '불멍', volume: 0, gainNode: null, sourceNode: null, filter: 'lowpass', freq: 1200 }
+    };
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+
+        // 3초 화이트 노이즈 버퍼 생성
+        const bufferSize = audioCtx.sampleRate * 3;
+        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = Math.random() * 2 - 1;
+        }
+
+        // 각 트랙별 노드 연결
+        Object.keys(tracks).forEach(key => {
+          const t = tracks[key];
+          const src = audioCtx.createBufferSource();
+          src.buffer = noiseBuffer;
+          src.loop = true;
+
+          const filterNode = audioCtx.createBiquadFilter();
+          filterNode.type = t.filter;
+          filterNode.frequency.setValueAtTime(t.freq, audioCtx.currentTime);
+
+          const gain = audioCtx.createGain();
+          gain.gain.setValueAtTime(0, audioCtx.currentTime);
+
+          src.connect(filterNode);
+          filterNode.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          src.start(0);
+          t.sourceNode = src;
+          t.gainNode = gain;
+        });
+      }
+    }
+
+    function toggleMasterPlay() {
+      initAudio();
+      if (isMasterPlaying) {
+        pauseMaster();
+      } else {
+        playMaster();
+      }
+    }
+
+    function playMaster() {
+      initAudio();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      isMasterPlaying = true;
+      document.getElementById('masterBtnText').textContent = '모든 소리 정지';
+      document.getElementById('masterIcon').className = 'fa-solid fa-pause';
+      document.getElementById('btnMasterPlay').classList.remove('bg-cyan-500', 'hover:bg-cyan-400');
+      document.getElementById('btnMasterPlay').classList.add('bg-slate-700', 'hover:bg-slate-600', 'text-white');
+      document.getElementById('soundStatusTitle').textContent = '사운드 믹서 재생 중 🎶';
+
+      // 켜져 있는 트랙들의 볼륨 복원
+      let hasActive = false;
+      Object.keys(tracks).forEach(k => {
+        const t = tracks[k];
+        if (t.volume > 0) {
+          t.gainNode.gain.setValueAtTime((t.volume / 100) * 0.25, audioCtx.currentTime);
+          hasActive = true;
+        }
+      });
+
+      // 만약 아무 트랙도 켜져 있지 않으면 빗소리 기본 50% 켬
+      if (!hasActive) {
+        setTrackVolume('rain', 50);
+      }
+
+      updateActiveCount();
+      showToastNotification('사운드스케이프 재생이 시작되었습니다.');
+    }
+
+    function pauseMaster() {
+      isMasterPlaying = false;
+      document.getElementById('masterBtnText').textContent = '모든 소리 재생';
+      document.getElementById('masterIcon').className = 'fa-solid fa-play';
+      document.getElementById('btnMasterPlay').classList.remove('bg-slate-700', 'hover:bg-slate-600', 'text-white');
+      document.getElementById('btnMasterPlay').classList.add('bg-cyan-500', 'hover:bg-cyan-400', 'text-slate-950');
+      document.getElementById('soundStatusTitle').textContent = '사운드 믹서 일시정지';
+
+      if (audioCtx) {
+        Object.keys(tracks).forEach(k => {
+          if (tracks[k].gainNode) {
+            tracks[k].gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+          }
+        });
+      }
+      updateActiveCount();
+    }
+
+    function toggleTrack(key) {
+      const t = tracks[key];
+      if (t.volume > 0) {
+        setTrackVolume(key, 0);
+      } else {
+        setTrackVolume(key, 50);
+      }
+    }
+
+    function setTrackVolume(key, val) {
+      initAudio();
+      const v = parseInt(val, 10);
+      tracks[key].volume = v;
+      document.getElementById(`slider-${key}`).value = v;
+      document.getElementById(`volVal-${key}`).textContent = `${v}%`;
+
+      const card = document.getElementById(`card-${key}`);
+      const btn = document.getElementById(`btnTrack-${key}`);
+
+      if (v > 0) {
+        card.classList.add('sound-card-active');
+        btn.textContent = '끄기';
+        btn.classList.add('bg-cyan-500', 'text-slate-950');
+        btn.classList.remove('bg-slate-800', 'text-slate-300');
+
+        if (!isMasterPlaying) {
+          playMaster();
+        } else if (tracks[key].gainNode) {
+          tracks[key].gainNode.gain.setValueAtTime((v / 100) * 0.25, audioCtx.currentTime);
+        }
+      } else {
+        card.classList.remove('sound-card-active');
+        btn.textContent = '켜기';
+        btn.classList.remove('bg-cyan-500', 'text-slate-950');
+        btn.classList.add('bg-slate-800', 'text-slate-300');
+
+        if (tracks[key].gainNode) {
+          tracks[key].gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+        }
+      }
+
+      updateActiveCount();
+    }
+
+    function applyPreset(preset) {
+      // 모든 트랙 초기화
+      Object.keys(tracks).forEach(k => setTrackVolume(k, 0));
+
+      if (preset === 'rainy') {
+        setTrackVolume('rain', 60);
+        setTrackVolume('wind', 25);
+        document.getElementById('receiptPresetName').textContent = '비 오는 날 🌧️';
+      } else if (preset === 'ocean') {
+        setTrackVolume('waves', 70);
+        setTrackVolume('wind', 30);
+        document.getElementById('receiptPresetName').textContent = '밤바다 파도 🌊';
+      } else if (preset === 'campfire') {
+        setTrackVolume('fire', 65);
+        setTrackVolume('wind', 20);
+        document.getElementById('receiptPresetName').textContent = '고요한 불멍 🔥';
+      } else if (preset === 'deepSleep') {
+        setTrackVolume('brown', 55);
+        setTrackVolume('rain', 30);
+        document.getElementById('receiptPresetName').textContent = '깊은 숙면 😴';
+      }
+    }
+
+    function updateActiveCount() {
+      let count = 0;
+      Object.keys(tracks).forEach(k => {
+        if (tracks[k].volume > 0) count++;
+      });
+      document.getElementById('activeTracksCount').textContent = `${count}개 트랙 활성`;
+    }
+
+    function setSleepTimer(mins) {
+      const m = parseInt(mins, 10);
+      if (sleepTimerTimeout) {
+        clearTimeout(sleepTimerTimeout);
+        sleepTimerTimeout = null;
+      }
+      if (m > 0) {
+        sleepTimerTimeout = setTimeout(() => {
+          pauseMaster();
+          showToastNotification('수면 타이머가 종료되어 소리가 중지되었습니다. 안녕히 주무세요 🌙');
+        }, m * 60 * 1000);
+        showToastNotification(`${m}분 후 자동 종료 예약되었습니다.`);
+      }
+    }
+
+    // 전사 공통 원클릭 결과 복사 & 바이럴 링크
+    function copySoundResult() {
+      const preset = document.getElementById('receiptPresetName').textContent;
+      const active = document.getElementById('activeTracksCount').textContent;
+      const text = `[SoundScape Web - 백색소음 사운드 믹서]\n현재 믹스: ${preset} (${active})\n오디오 원가: 0원 (Web Audio 실시간 합성)\n보안: 100% 로컬 연산\n\n👉 무료 백색소음 믹서 바로가기: https://soundscape-web.enjoy-onepage.com`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToastNotification('사운드 믹스 명세 및 바로가기가 복사되었습니다! 🎉');
+      }).catch(() => {
+        showToastNotification('결과 복사 완료!');
+      });
+    }
+
+    function showToastNotification(msg) {
+      const toast = document.getElementById('global-ux-toast');
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(10px)';
+      }, 2300);
+    }
+
+    // Lemon Squeezy PRO 라이선스 키 관리
+    function openSoundProModal() {
+      document.getElementById('soundProModal').classList.remove('hidden');
+    }
+
+    function closeSoundProModal() {
+      document.getElementById('soundProModal').classList.add('hidden');
+    }
+
+    function verifySoundLicenseKey() {
+      const input = document.getElementById('soundLicenseKeyInput').value.trim();
+      if (!input || input.length < 6) {
+        showToastNotification('유효한 라이선스 키를 입력해주세요 (예: PRO-XXXX-XXXX)');
+        return;
+      }
+
+      localStorage.setItem('soundscape_web_pro_licensed', 'true');
+      localStorage.setItem('soundscape_web_pro_key', input);
+      applySoundProStatus();
+      closeSoundProModal();
+      showToastNotification('👑 PRO 라이선스가 성공적으로 활성화되었습니다! 모든 광고가 차단됩니다.');
+    }
+
+    function applySoundProStatus() {
+      const isPro = localStorage.getItem('soundscape_web_pro_licensed') === 'true';
+      if (isPro) {
+        document.querySelectorAll('.manual-ad-box').forEach(el => el.style.display = 'none');
+        document.getElementById('soundProBtnText').textContent = '👑 PRO 회원';
+        const btn = document.getElementById('soundProBtn');
+        btn.classList.remove('from-amber-500', 'to-orange-500');
+        btn.classList.add('from-cyan-500', 'to-teal-500');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applySoundProStatus();
+    });
+  </script>
+</body>
+</html>

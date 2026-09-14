@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://soundscape-web.enjoy-onepage.com/sitemap.xml

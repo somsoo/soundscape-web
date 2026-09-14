@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서비스 소개 & 오디오 합성 원리 | SoundScape Web</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased py-12 px-4 sm:px-6">
+  <div class="max-w-3xl mx-auto bg-slate-900 p-8 sm:p-12 rounded-3xl shadow-xl border border-slate-800">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-10 h-10 rounded-xl bg-cyan-500 text-slate-950 flex items-center justify-center font-bold text-lg">
+        <i class="fa-solid fa-sliders"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl font-black text-white">SoundScape Web 기술 아키텍처 & E-E-A-T</h1>
+        <p class="text-xs text-slate-400">BetterSleep·Calm의 고가 구독 대안, 100% 무서버 사운드 믹서</p>
+      </div>
+    </div>
+    
+    <div class="space-y-6 text-sm leading-relaxed text-slate-300">
+      <div class="p-4 bg-cyan-950/40 rounded-2xl border border-cyan-800 text-cyan-200 text-xs">
+        💡 <strong>개발 배경:</strong> 기존 백색소음 앱들의 사운드 유료 잠금($79.99/년)과 재생 중간 팝업 광고로 수면/집중이 깨지는 문제를 해결하고자, 브라우저 Web Audio 노이즈 알고리즘으로 구축되었습니다.
+      </div>
+      
+      <h2 class="text-lg font-bold text-white">1. 무서버 Web Audio 합성 기술</h2>
+      <p>빗소리, 파도 소리, 브라운 노이즈를 수십 메가바이트의 오디오 파일로 다운로드하지 않고, 브라우저가 직접 실시간 노이즈 필터링(BiquadFilter 및 GainNode)으로 합성하여 데이터 소모 0을 달성했습니다.</p>
+    </div>
+
+    <div class="mt-8 pt-6 border-t border-slate-800 flex justify-between items-center text-xs">
+      <a href="./" class="text-cyan-400 font-bold hover:underline">← 사운드 믹서로 돌아가기</a>
+      <span class="text-slate-500">Antigravity Architecture Standard</span>
+    </div>
+  </div>
+</body>
+</html>
