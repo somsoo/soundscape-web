@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-  <title>백색소음 사운드 믹서 | 수면·집중 빗소리·파도·화이트 노이즈 무료 합성기 (SoundScape Web)</title>
-  <link>https://soundscape-web.enjoy-onepage.com/</link>
-  <description>BetterSleep의 무료 대안! 광고로 끊김 없는 100% 브라우저 Web Audio 백색소음 합성 믹서. 빗소리, 파도, 브라운 노이즈, 캠프파이어 볼륨 믹싱 및 수면 타이머.</description>
-  <language>ko-kr</language>
-  <atom:link href="https://soundscape-web.enjoy-onepage.com/rss.xml" rel="self" type="application/rss+xml" />
-  <lastBuildDate>Tue, 29 Sep 2026 06:01:17 +0000</lastBuildDate>
-  <item>
-    <title>이용약관 | SoundScape Web</title>
-    <link>https://soundscape-web.enjoy-onepage.com/terms.html</link>
-    <guid isPermaLink="true">https://soundscape-web.enjoy-onepage.com/terms.html</guid>
-    <description>이용약관 | SoundScape Web</description>
-    <pubDate>Mon, 14 Sep 2026 12:07:09 +0900</pubDate>
-  </item>
-  <item>
-    <title>서비스 소개 &amp; 오디오 합성 원리 | SoundScape Web</title>
-    <link>https://soundscape-web.enjoy-onepage.com/about.html</link>
-    <guid isPermaLink="true">https://soundscape-web.enjoy-onepage.com/about.html</guid>
-    <description>서비스 소개 &amp; 오디오 합성 원리 | SoundScape Web</description>
-    <pubDate>Mon, 14 Sep 2026 12:07:09 +0900</pubDate>
-  </item>
-  <item>
-    <title>개인정보처리방침 &amp; 100% 로컬 연산 보증서 | SoundScape Web</title>
-    <link>https://soundscape-web.enjoy-onepage.com/privacy.html</link>
-    <guid isPermaLink="true">https://soundscape-web.enjoy-onepage.com/privacy.html</guid>
-    <description>개인정보처리방침 &amp; 100% 로컬 연산 보증서 | SoundScape Web</description>
-    <pubDate>Mon, 14 Sep 2026 12:07:09 +0900</pubDate>
-  </item>
-</channel>
+  <channel>
+    <title>백색소음 사운드 믹서 | 수면·집중용 빗소리·파도 소리</title>
+    <link>https://soundscape-web.enjoy-onepage.com/</link>
+    <description>BetterSleep 무료 대안. 광고 끊김 없이 빗소리·파도·브라운 노이즈·캠프파이어를 섞고 수면 타이머를 켜세요.</description>
+    <language>ko-kr</language>
+    <lastBuildDate>Thu, 01 Oct 2026 03:32:10 +0900</lastBuildDate>
+    <atom:link href="https://soundscape-web.enjoy-onepage.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>백색소음 사운드 믹서 | 수면·집중용 빗소리·파도 소리</title>
+      <link>https://soundscape-web.enjoy-onepage.com/</link>
+      <guid isPermaLink="true">https://soundscape-web.enjoy-onepage.com/</guid>
+      <description>BetterSleep 무료 대안. 광고 끊김 없이 빗소리·파도·브라운 노이즈·캠프파이어를 섞고 수면 타이머를 켜세요.</description>
+      <pubDate>Thu, 01 Oct 2026 03:32:10 +0900</pubDate>
+    </item>
+    <item>
+      <title>개인정보처리방침 &amp; 100% 로컬 연산 보증서 | SoundScape Web</title>
+      <link>https://soundscape-web.enjoy-onepage.com/privacy.html</link>
+      <guid isPermaLink="true">https://soundscape-web.enjoy-onepage.com/privacy.html</guid>
+      <description>개인정보처리방침 &amp; 100% 로컬 연산 보증서 | SoundScape Web</description>
+      <pubDate>Mon, 14 Sep 2026 12:07:09 +0900</pubDate>
+    </item>
+    <item>
+      <title>이용약관 | SoundScape Web</title>
+      <link>https://soundscape-web.enjoy-onepage.com/terms.html</link>
+      <guid isPermaLink="true">https://soundscape-web.enjoy-onepage.com/terms.html</guid>
+      <description>이용약관 | SoundScape Web</description>
+      <pubDate>Mon, 14 Sep 2026 12:07:09 +0900</pubDate>
+    </item>
+  </channel>
 </rss>
