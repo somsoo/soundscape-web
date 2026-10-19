@@ -8,7 +8,7 @@
 
 <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>백색소음 사운드 믹서 | 수면·집중용 빗소리·파도 소리</title>
+<title>백색소음 사운드 믹서 | 수면·집중 빗소리·파도</title>
 <meta content="무료 백색소음 믹서. 빗소리·파도·모닥불 소리·브라운 노이즈를 섞어 틀고, 수면 타이머로 정해진 시간 뒤에 멈출 수 있습니다." name="description"/>
 <link href="https://soundscape-web.enjoy-onepage.com/" rel="canonical"/>
 <meta content="SoundScape Web - 광고 없는 무료 백색소음 사운드 믹서" property="og:title"/>
@@ -676,7 +676,7 @@
 
     function setTrackVolume(key, val) {
       initAudio();
-      const v = parseInt(val, 10);
+      const v = Math.max(0, Math.min(100, parseInt(val, 10) || 0));
       tracks[key].volume = v;
       document.getElementById(`slider-${key}`).value = v;
       document.getElementById(`volVal-${key}`).textContent = `${v}%`;
